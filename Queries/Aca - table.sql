@@ -1,0 +1,20 @@
+-- ACA Pagado-----
+
+SELECT 
+    aca.Periodo, aca.nipperfilagente,
+		sum(aca.PrimaNetaPagadaAcumulada) AS Pagada_acumulada
+FROM dbo.VW_Bi_grlACAPrimaBonoxAgente aca
+
+WHERE aca.Periodo in (202312, 202412)
+AND aca.NipPerfilAgente in (090513,100235,100241,090514,100236,100242,090515,090519,
+100237,100243,090517,095461,100239,100244,090518,097311,
+099009,100240,100245,091864,096868,110314,110317,110319,
+110323,110320,110418,110322,110419,103455,103456,104685,
+112378,112377)
+AND IdGpoBono in (199)
+
+GROUP BY  aca.Periodo, aca.nipperfilagente
+
+SELECT * FROM TB_BI_DimGpoBono
+
+SELECT top 10* FROM dbo.VW_Bi_grlACAPrimaBonoxAgente
